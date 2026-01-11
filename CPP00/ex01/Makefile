@@ -5,7 +5,7 @@ C++FLAGS = -Wall -Wextra -Werror -std=c++98
 INCLUDES = Contact.hpp PhoneBook.hpp
 
 SRCS = PhoneBook.cpp main.cpp Contact.cpp
-OBJS = $(SRC:.cpp=.o)
+OBJS = $(SRCS:.cpp=.o)
 
 all: $(NAME)
 

@@ -1,10 +1,7 @@
 #include "PhoneBook.hpp"
 
 
-Phonebook::Phonebook():N_index(0)
-{
-	// std::cout << "PhoneBook Constructor called" << std::endl;
-};
+Phonebook::Phonebook():N_index(0) {};
 
 std::string	check_input(std::string prompt)
 {
@@ -70,12 +67,12 @@ void Phonebook::search()
 	std::cout << "Enter An Index To See Details Of Contact: ";
 	std::string input;
 	std::getline(std::cin, input);
-	int index = std::stoi(input);
-	if (index < 0 || index > 7)
+	if (input < "0" || input > "7" || input.length() != 1)
 	{
 		std::cout << "---> Error: Invalid Index !" << std::endl;
 		return ;
 	}
+	int index = std::atoi(input.c_str());
 	if (Contacts[index].get_fisrt_name().empty())
 	{
 		std::cout << "--> No Contact Was Found For Index " << index << " !" << std::endl;

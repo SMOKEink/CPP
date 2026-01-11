@@ -13,8 +13,6 @@ private:
 	std::string	phone_number;
 	std::string	darkest_secret;
 public:
-	Contact();
-
 	void set_first_name(const std::string& firstN);
 	void set_last_name(const std::string& lastN);
 	void set_nickname(const std::string& nickN);
@@ -27,6 +25,5 @@ public:
 	std::string	get_phone_number() const;
 	std::string	get_secret() const;
 };
-
 
 #endif

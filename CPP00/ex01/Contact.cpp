@@ -1,14 +1,9 @@
 #include "Contact.hpp"
 
-
-Contact::Contact()
-{
-	// std::cout << "Contact Construstor Called" << std::endl;
-}
 void	Contact::set_first_name(const std::string& firstN) {first_name = firstN;}
 void	Contact::set_last_name(const std::string& lastN) {last_name = lastN;}
 void	Contact::set_nickname(const std::string& nickN) {nickname = nickN;}
-void	Contact::set_phone_nb(const std::string& PhoneN) {phone_number = phone_number;}
+void	Contact::set_phone_nb(const std::string& PhoneN) {phone_number = PhoneN;}
 void	Contact::set_secret(const std::string& DarkestS) {darkest_secret = DarkestS;}
 
 std::string	Contact::get_fisrt_name() const {return first_name;}
