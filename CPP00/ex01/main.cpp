@@ -13,7 +13,7 @@ int main()
 			break ;
 		if (command.empty())
 		{
-			std::cout << "---> Warning: Empty Field, Try Again !!\n";
+			std::cout << "---> Warning: Empty Command, Try Again !!\n";
 			continue ;
 		}
 		if (command == "ADD")
@@ -22,10 +22,11 @@ int main()
 			phonebook.search();
 		else if (command == "EXIT")
 		{
-			std::cout << "Exited Succesfully" << std::endl;
+			std::cout << "Exited Successfully" << std::endl;
 			break ;
 		}
 		else
 			std::cout << "---> Warning: Invalid Command, Try Again !!" << std::endl;
 	}
+	return (0);
 }
