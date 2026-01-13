@@ -14,7 +14,7 @@ private:
 	
 public:
 	Phonebook();
-
+	~Phonebook();
 	void	add();
 	void	search();
 };

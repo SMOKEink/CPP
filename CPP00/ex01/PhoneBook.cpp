@@ -1,6 +1,14 @@
 #include "PhoneBook.hpp"
 
-Phonebook::Phonebook():N_index(0) {};
+Phonebook::Phonebook()
+{
+	N_index = 0;
+};
+
+Phonebook::~Phonebook()
+{
+	std::cout << "PhoneBook Destructor is Called" << std::endl;
+};
 
 std::string	check_input(std::string prompt)
 {
@@ -68,7 +76,7 @@ void Phonebook::search()
 	for (int i = 0; i < 8; i++)
 	{	
 		std::cout << "|"  << "    " << i << "     " << "|";
-			controlled_print(Contacts[i].get_fisrt_name());
+			controlled_print(Contacts[i].get_first_name());
 		std::cout << "|";
 			controlled_print(Contacts[i].get_last_name());
 		std::cout << "|";
@@ -86,13 +94,13 @@ void Phonebook::search()
 		return ;
 	}
 	int index = std::atoi(input.c_str());
-	if (Contacts[index].get_fisrt_name().empty())
+	if (Contacts[index].get_first_name().empty())
 	{
 		std::cout << "--> No Contact Was Found For Index " << index << " !" << std::endl;
 		return ;
 	}
 	std::cout << "---------------------------------------------\n"
-			  << "First Name: " << Contacts[index].get_fisrt_name() << '\n'
+			  << "First Name: " << Contacts[index].get_first_name() << '\n'
 			  << "Last Name: " << Contacts[index].get_last_name() << '\n'
 			  << "Nick_Name: " << Contacts[index].get_nickname() << '\n'
 			  << "Phone Number: " << Contacts[index].get_phone_number() << '\n'
