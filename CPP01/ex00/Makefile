@@ -1,10 +1,9 @@
-NAME = PhoneBook
+NAME = Zombie
 
 FLAGS = -Wall -Wextra -Werror -std=c++98
 
-INCLUDES = Contact.hpp PhoneBook.hpp
+SRCS = main.cpp Zombie.cpp newZombie.cpp randomChump.cpp
 
-SRCS = PhoneBook.cpp main.cpp Contact.cpp
 OBJS = $(SRCS:.cpp=.o)
 
 all: $(NAME)
@@ -12,8 +11,8 @@ all: $(NAME)
 %.o: %.cpp
 	c++ $(FLAGS) -c $< -o $@
 
-$(NAME): $(OBJS) $(INCLUDES)
-	c++ $(FLAGS) $(OBJS) -o $@
+$(NAME): $(OBJS) Zombie.h
+	c++ $(FLAGS) $(OBJS) -o $(NAME)
 
 clean:
 	rm -f $(OBJS)
@@ -22,3 +21,4 @@ fclean: clean
 	rm -f $(NAME)
 
 re: fclean all
+

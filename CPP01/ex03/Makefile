@@ -1,10 +1,11 @@
-NAME = PhoneBook
+NAME = 
 
 FLAGS = -Wall -Wextra -Werror -std=c++98
 
-INCLUDES = Contact.hpp PhoneBook.hpp
+INCLUDES = Weapon.hpp HumanA.hpp HumanB.hpp
 
-SRCS = PhoneBook.cpp main.cpp Contact.cpp
+SRCS = main.c Weapon.cpp HumanA.cpp HumanB.cpp
+
 OBJS = $(SRCS:.cpp=.o)
 
 all: $(NAME)

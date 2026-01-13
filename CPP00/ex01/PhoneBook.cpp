@@ -1,11 +1,11 @@
 #include "PhoneBook.hpp"
 
-
 Phonebook::Phonebook():N_index(0) {};
 
 std::string	check_input(std::string prompt)
 {
 	std::string tmp;
+	bool	not_nbr = 0;
 
 	while (1)
 	{
@@ -13,6 +13,19 @@ std::string	check_input(std::string prompt)
 		std::getline(std::cin, tmp);
 		if (std::cin.eof())
 			exit(0);
+		if (prompt == "Enter Phone Number: ")
+			for(int i = 0; tmp[i]; i++)
+				if (tmp[i] > '9' || tmp[i] < '0')
+				{
+					not_nbr = 1;
+					break ;
+				}
+		if (not_nbr)
+		{
+			std::cout << "Warning: Phone Number Must Include Only Numbers !" << std::endl;
+			not_nbr = 0;
+			continue ;
+		}
 		if (!tmp.empty())
 			return (tmp);
 		std::cout << "---> Warning: Empty Field, Try Again !!\n";
