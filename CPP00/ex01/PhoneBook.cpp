@@ -15,7 +15,7 @@ std::string	check_input(std::string prompt)
 	std::string input;
 	bool	not_nbr = 0;
 
-	while (1)
+	while (1337)
 	{
 		std::cout << prompt;
 		std::getline(std::cin, input);
