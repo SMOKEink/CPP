@@ -61,7 +61,7 @@ void Phonebook::controlled_print(std::string field)
 {
 	if (field.length() > 10)
 		field = field.substr(0, 9) + '.';
-	std::cout << std::setw(10) << std::left << field;
+	std::cout << std::setw(10) << std::right << field;
 }
 
 void Phonebook::search()
