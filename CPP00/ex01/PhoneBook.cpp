@@ -75,7 +75,7 @@ void Phonebook::search()
 	std::cout << "............................................." << std::endl;
 	for (int i = 0; i < 8; i++)
 	{	
-		std::cout << "|"  << "    " << i << "     " << "|";
+		std::cout << "|"  << "         " << i << "|";
 			ControlledPrint(Contacts[i].GetFirstName());
 		std::cout << "|";
 			ControlledPrint(Contacts[i].GetLastName());
