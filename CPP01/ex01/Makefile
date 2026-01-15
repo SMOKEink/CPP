@@ -8,10 +8,10 @@ OBJS = $(SRCS:.cpp=.o)
 
 all: $(NAME)
 
-%.o: %.cpp
+%.o: %.cpp Zombie.hpp
 	c++ $(FLAGS) -c $< -o $@
 
-$(NAME): $(OBJS) Zombie.hpp
+$(NAME): $(OBJS)
 	c++ $(FLAGS) $(OBJS) -o $(NAME)
 
 clean:

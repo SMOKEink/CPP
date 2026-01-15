@@ -2,11 +2,11 @@
 
 int main()
 {
-	int N = 2;
-	Zombie *horde = zombieHorde(N, "Zomb");
+	int N = 2147483648;
+	Zombie *horde = zombieHorde(N, "Zombie");
 	if (!horde)
 	{
-		std::cout << "new failed" << std::endl;
+		std::cout << "Error : N Out Of Range!" << std::endl;
 		return (1);
 	}
 	for(int i = 0; i < N; i++)
