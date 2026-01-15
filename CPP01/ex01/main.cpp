@@ -3,6 +3,8 @@
 int main()
 {
 	int N = 2147483648;
+	if (N == 0)
+		return (0);
 	Zombie *horde = zombieHorde(N, "Zombie");
 	if (!horde)
 	{
