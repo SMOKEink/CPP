@@ -2,7 +2,7 @@
 
 int main()
 {
-	Phonebook	phonebook;
+	Phonebook	Phonebook;
 	std::string command;
 
 	while (1337)
@@ -17,9 +17,9 @@ int main()
 			continue ;
 		}
 		if (command == "ADD")
-			phonebook.add();
+			Phonebook.add();
 		else if (command == "SEARCH")
-			phonebook.search();
+			Phonebook.search();
 		else if (command == "EXIT")
 		{
 			std::cout << "Exited Successfully" << std::endl;
