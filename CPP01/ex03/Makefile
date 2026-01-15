@@ -1,19 +1,19 @@
-NAME = 
+NAME = violence
 
 FLAGS = -Wall -Wextra -Werror -std=c++98
 
 INCLUDES = Weapon.hpp HumanA.hpp HumanB.hpp
 
-SRCS = main.c Weapon.cpp HumanA.cpp HumanB.cpp
+SRCS = main.cpp Weapon.cpp HumanA.cpp HumanB.cpp
 
 OBJS = $(SRCS:.cpp=.o)
 
 all: $(NAME)
 
-%.o: %.cpp
+%.o: %.cpp $(INCLUDES)
 	c++ $(FLAGS) -c $< -o $@
 
-$(NAME): $(OBJS) $(INCLUDES)
+$(NAME): $(OBJS)
 	c++ $(FLAGS) $(OBJS) -o $@
 
 clean:
@@ -23,3 +23,5 @@ fclean: clean
 	rm -f $(NAME)
 
 re: fclean all
+
+.PHONY: clean
