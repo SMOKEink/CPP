@@ -10,7 +10,7 @@ Phonebook::~Phonebook()
 	std::cout << "PhoneBook Destructor is Called" << std::endl;
 };
 
-std::string	check_input(std::string prompt)
+std::string	Phonebook::CheckInput(std::string prompt)
 {
 	std::string input;
 	bool	not_nbr = 0;
@@ -44,11 +44,11 @@ void Phonebook::add()
 {
 	Contact contact;
 
-	contact.set_first_name(check_input("Enter First Name: "));
-	contact.set_last_name(check_input("Enster Last Name: "));
-	contact.set_nickname(check_input("Enter Nickname: "));
-	contact.set_phone_nb(check_input("Enter Phone Number: "));
-	contact.set_secret(check_input("Enter Darkest Secret: "));
+	contact.SetFirstName(CheckInput("Enter First Name: "));
+	contact.SetLastName(CheckInput("Enster Last Name: "));
+	contact.SetNickname(CheckInput("Enter Nickname: "));
+	contact.SetPhoneNumber(CheckInput("Enter Phone Number: "));
+	contact.SetSecret(CheckInput("Enter Darkest Secret: "));
 
 	Contacts[N_index] = contact;
 	if (N_index == 7)
@@ -57,7 +57,7 @@ void Phonebook::add()
 	N_index++;
 }
 
-void Phonebook::controlled_print(std::string field)
+void Phonebook::ControlledPrint(std::string field)
 {
 	if (field.length() > 10)
 		field = field.substr(0, 9) + '.';
@@ -76,11 +76,11 @@ void Phonebook::search()
 	for (int i = 0; i < 8; i++)
 	{	
 		std::cout << "|"  << "    " << i << "     " << "|";
-			controlled_print(Contacts[i].get_first_name());
+			ControlledPrint(Contacts[i].GetFirstName());
 		std::cout << "|";
-			controlled_print(Contacts[i].get_last_name());
+			ControlledPrint(Contacts[i].GetLastName());
 		std::cout << "|";
-			controlled_print(Contacts[i].get_nickname());
+			ControlledPrint(Contacts[i].GetNickname());
 		std::cout << "|" << std::endl;
 	}
 	std::cout << "............................................." << std::endl;
@@ -94,16 +94,16 @@ void Phonebook::search()
 		return ;
 	}
 	int index = std::atoi(input.c_str());
-	if (Contacts[index].get_first_name().empty())
+	if (Contacts[index].GetFirstName().empty())
 	{
 		std::cout << "--> No Contact Was Found For Index " << index << " !" << std::endl;
 		return ;
 	}
 	std::cout << "---------------------------------------------\n"
-			  << "First Name: " << Contacts[index].get_first_name() << '\n'
-			  << "Last Name: " << Contacts[index].get_last_name() << '\n'
-			  << "Nick_Name: " << Contacts[index].get_nickname() << '\n'
-			  << "Phone Number: " << Contacts[index].get_phone_number() << '\n'
-			  << "Darkest Secret: " << Contacts[index].get_secret() << '\n'
+			  << "First Name: " << Contacts[index].GetFirstName() << '\n'
+			  << "Last Name: " << Contacts[index].GetLastName() << '\n'
+			  << "Nick_Name: " << Contacts[index].GetNickname() << '\n'
+			  << "Phone Number: " << Contacts[index].GetPhoneNumber() << '\n'
+			  << "Darkest Secret: " << Contacts[index].GetSecret() << '\n'
 			  << "---------------------------------------------" << std::endl;
 }

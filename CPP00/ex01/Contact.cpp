@@ -9,14 +9,14 @@ Contact::~Contact()
 	std::cout << "Contact Destructor is Called" << std::endl;
 }
 
-void	Contact::set_first_name(std::string firstN) {first_name = firstN;}
-void	Contact::set_last_name(std::string lastN) {last_name = lastN;}
-void	Contact::set_nickname(std::string nickN) {nickname = nickN;}
-void	Contact::set_phone_nb(std::string PhoneN) {phone_number = PhoneN;}
-void	Contact::set_secret(std::string DarkestS) {darkest_secret = DarkestS;}
+void	Contact::SetFirstName(std::string firstN) {FirstName = firstN;}
+void	Contact::SetLastName(std::string lastN) {LastName = lastN;}
+void	Contact::SetNickname(std::string nickN) {Nickname = nickN;}
+void	Contact::SetPhoneNumber(std::string PhoneN) {PhoneNumber = PhoneN;}
+void	Contact::SetSecret(std::string DarkestS) {DarkestSecret = DarkestS;}
 
-std::string	Contact::get_first_name() const {return first_name;}
-std::string	Contact::get_last_name() const {return last_name;}
-std::string	Contact::get_nickname() const {return nickname;}
-std::string	Contact::get_phone_number() const {return phone_number;}
-std::string	Contact::get_secret() const {return darkest_secret;}
+std::string	Contact::GetFirstName() const {return FirstName;}
+std::string	Contact::GetLastName() const {return LastName;}
+std::string	Contact::GetNickname() const {return Nickname;}
+std::string	Contact::GetPhoneNumber() const {return PhoneNumber;}
+std::string	Contact::GetSecret() const {return DarkestSecret;}

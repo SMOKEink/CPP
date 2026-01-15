@@ -10,8 +10,8 @@ class Phonebook
 private:
 	Contact Contacts[8];
 	int		N_index;
-	void	controlled_print(std::string field);
-	
+	void	ControlledPrint(std::string field);
+	std::string CheckInput(std::string prompt);
 public:
 	Phonebook();
 	~Phonebook();
