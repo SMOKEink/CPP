@@ -16,7 +16,7 @@ void HumanB::attack()
 		std::cout << name << " attacks with a Slap (Unarmed)" << std::endl;
 }
 
-void HumanB::SetWeaponB(Weapon& weapon)
+void HumanB::setWeapon(Weapon& weapon)
 {
 	this->weapon = &weapon;
 }
