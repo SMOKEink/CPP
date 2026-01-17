@@ -1,0 +1,23 @@
+NAME = Harl2.0
+
+FLAGS = -Wall -Wextra -Werror -std=c++98
+
+SRCS = main.cpp Harl.cpp
+
+OBJS = $(SRCS:.cpp=.o)
+
+all: $(NAME)
+
+%.o: %.cpp Harl.hpp
+	c++ $(FLAGS) -c $< -o $@
+
+$(NAME): $(OBJS)
+	c++ $(FLAGS) $(OBJS) -o $(NAME)
+
+clean:
+	rm -f $(OBJS)
+
+fclean: clean
+	rm -f $(NAME)
+
+re: fclean all
