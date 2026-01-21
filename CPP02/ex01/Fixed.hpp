@@ -7,7 +7,7 @@
 class Fixed
 {
 private:
-	int	fixedPointNb;
+	int	rawBits;
 	static const int fractionalBits;
 public:
 	Fixed();
@@ -25,6 +25,6 @@ public:
 	int toInt(void) const;
 };
 
-std::ostream& operator<<(std::ostream& out, const Fixed& fixed);
+std::ostream& operator<<(std::ostream& cout, const Fixed& fixed);
 
 #endif
