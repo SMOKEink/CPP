@@ -64,3 +64,55 @@ std::ostream& operator<<(std::ostream& cout, const Fixed& fixed)
 	cout << fixed.toFloat();
 	return (cout);
 }
+
+bool Fixed::operator>(const Fixed &other) const
+{
+	return (rawBits > other.rawBits);
+}
+bool Fixed::operator<(const Fixed &other) const
+{
+	return (rawBits < other.rawBits);
+}
+bool Fixed::operator>=(const Fixed &other) const
+{
+	return (rawBits >= other.rawBits);
+}
+bool Fixed::operator<=(const Fixed &other) const
+{
+	return (rawBits <= other.rawBits);
+}
+bool Fixed::operator==(const Fixed &other) const
+{
+	return (rawBits == other.rawBits);
+}
+bool Fixed::operator!=(const Fixed &other) const
+{
+	return (rawBits != other.rawBits);
+}
+
+Fixed Fixed::operator+(const Fixed &other) const
+{
+	Fixed sum;
+	sum.setRawBits(this->rawBits + other.rawBits);
+	return (sum);
+}
+Fixed Fixed::operator-(const Fixed &other) const
+{
+	Fixed diff;
+	diff.setRawBits(this->rawBits - other.rawBits);
+	return (diff);
+}
+Fixed Fixed::operator*(const Fixed &other) const
+{
+	Fixed product;
+	long res = (long)rawBits * (long)other.rawBits;
+	product.setRawBits(res / (1 << fractionalBits));
+	return (product);
+}
+Fixed Fixed::operator/(const Fixed &other) const
+{
+	Fixed quotient;
+	long res = ((long)rawBits << fractionalBits) / other.rawBits;
+	quotient.setRawBits(res);
+	return (quotient);
+}
