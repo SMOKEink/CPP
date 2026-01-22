@@ -116,3 +116,51 @@ Fixed Fixed::operator/(const Fixed &other) const
 	quotient.setRawBits(res);
 	return (quotient);
 }
+
+Fixed& Fixed::operator++()
+{
+	++rawBits;
+	return (*this);
+}
+Fixed Fixed::operator++(int)
+{
+	Fixed tmp(*this);
+	++rawBits;
+	return (tmp);
+}
+Fixed& Fixed::operator--()
+{
+	--rawBits;
+	return (*this);
+}
+Fixed Fixed::operator--(int)
+{
+	Fixed tmp(*this);
+	--rawBits;
+	return (tmp);
+}
+
+Fixed& Fixed::min(Fixed &a, Fixed &b)
+{
+	if (a < b)
+		return (a);
+	return (b);
+}
+const Fixed& Fixed::min(const Fixed &a, const Fixed &b)
+{
+	if (a < b)
+		return (a);
+	return (b);
+}
+Fixed& Fixed::max(Fixed &a, Fixed &b)
+{
+	if (a > b)
+		return (a);
+	return (b);
+}
+const Fixed& Fixed::max(const Fixed &a, const Fixed &b)
+{
+	if (a > b)
+		return (a);
+	return (b);
+}
