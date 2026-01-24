@@ -2,33 +2,31 @@
 
 int main()
 {
-	std::cout << "----- Creating ClapTraps -----" << std::endl;
-	ClapTrap a("Alpha");
-	ClapTrap b("Beta");
+	ClapTrap a("One");
+	ClapTrap b("Two");
 
-	std::cout << "\n----- Basic actions -----" << std::endl;
-	a.attack("Beta");
+	std::cout << "\n----------------------------------------------" << std::endl;
+	a.attack("Two");
 	b.takeDamage(0);
 	b.beRepaired(5);
 
-	std::cout << "\n----- Energy depletion -----" << std::endl;
+	std::cout << "\n----------------------------------------------" << std::endl;
 	for (int i = 0; i < 11; i++)
-		a.attack("BRAHIM");
+		a.attack("Enemy");
 
-	std::cout << "\n----- Damage until death -----" << std::endl;
-	b.takeDamage(3);
-	b.takeDamage(20);
-	b.takeDamage(20);
+	std::cout << "\n----------------------------------------------" << std::endl;
+	b.takeDamage(5);
+	b.takeDamage(5);
+	b.takeDamage(5);
 
-	std::cout << "\n----- Actions after death -----" << std::endl;
+	std::cout << "\n----------------------------------------------" << std::endl;
 	b.attack("Ghost");
 	b.beRepaired(10);
 
-	std::cout << "\n----- Copy & assignment tests -----" << std::endl;
+	std::cout << "\n----------------------------------------------" << std::endl;
 	ClapTrap c(a);
 	ClapTrap d;
 	d = a;
-
-	std::cout << "\n----- End of main -----" << std::endl;
-	return 0;
+	std::cout << "\n----------------------------------------------" << std::endl;
+	return (0);
 }
