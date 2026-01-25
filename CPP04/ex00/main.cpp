@@ -6,29 +6,29 @@
 
 int main()
 {
-    std::cout << "-------------------------------" << std::endl;
-    Animal* animal = new Animal();
-    Animal* dogAnimal = new Dog();
-    Animal* catAnimal = new Cat();
+	std::cout << "-------------------------------" << std::endl;
+	Animal* animal = new Animal();
+	Animal* dogAnimal = new Dog();
+	Animal* catAnimal = new Cat();
 
-    std::cout << "dogAnimal type : " << dogAnimal->getType() << std::endl;
-    std::cout << "catAnimal type : " << catAnimal->getType() << std::endl;
+	std::cout << "dogAnimal type : " << dogAnimal->getType() << std::endl;
+	std::cout << "catAnimal type : " << catAnimal->getType() << std::endl;
 
-    animal->makeSound();
-    dogAnimal->makeSound();
-    catAnimal->makeSound();
+	animal->makeSound();
+	dogAnimal->makeSound();
+	catAnimal->makeSound();
 
-    delete (animal);
-    delete (dogAnimal);
-    delete (catAnimal);
+	delete (animal);
+	delete (dogAnimal);
+	delete (catAnimal);
 
-    std::cout << "\n-------------------------------" << std::endl;
-    WrongAnimal* wrongCatAnimal = new WrongCat();
+	std::cout << "\n-------------------------------" << std::endl;
+	WrongAnimal* wrongCatAnimal = new WrongCat();
 
-    std::cout << "wrongCatAnimal type : " << wrongCatAnimal->getType() << std::endl;
-    wrongCatAnimal->makeSound();
+	std::cout << "wrongCatAnimal type : " << wrongCatAnimal->getType() << std::endl;
+	wrongCatAnimal->makeSound();
 
-    delete (wrongCatAnimal);
+	delete (wrongCatAnimal);
 
-    return (0);
+	return (0);
 }
