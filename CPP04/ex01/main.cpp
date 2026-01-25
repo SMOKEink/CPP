@@ -3,7 +3,7 @@
 
 int main()
 {
-	std::cout << "---- Animal array test ----" << std::endl;
+	std::cout << "------------------------------------" << std::endl;
 	const Animal* animals[4];
 
 	animals[0] = new Dog();
@@ -14,7 +14,7 @@ int main()
 	for (int i = 0; i < 4; i++)
 		delete (animals[i]);
 
-	std::cout << "\n---- Deep copy test ----" << std::endl;
+	std::cout << "\n-----------------------------------" << std::endl;
 	Dog original;
 	original.getBrain()->setIdea(0, "I want food");
 
