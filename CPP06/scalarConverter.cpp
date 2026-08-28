@@ -96,11 +96,26 @@ static void printInt(double d)
 }
 static void printFloat(double d)
 {
-	
+	std::cout << std::fixed;
+	std::cout.precision(1);
+	if (std::isnan(d))
+		std::cout << "float: nanf" << std::endl;
+	else if (std::isinf(d))
+		std::cout << "float: " << (d > 0 ? "+inff" : "-inff") << std::endl;
+	else
+		std::cout << "float: " << static_cast<float>(d) << "f" << std::endl;
 }
+
 static void printDouble(double d)
 {
-
+	std::cout << std::fixed;
+	std::cout.precision(1);
+	if (std::isnan(d))
+		std::cout << "double: nan" << std::endl;
+	else if (std::isinf(d))
+		std::cout << "double: " << (d > 0 ? "+inf" : "-inf") << std::endl;
+	else
+		std::cout << "double: " << d << std::endl;
 }
 
 void scalarConverter::convert(const std::string& str)
