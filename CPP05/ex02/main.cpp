@@ -9,43 +9,32 @@
 int main()
 {
 	std::srand(std::time(NULL));
-	std::cout << "===== Shrubbery =====" << std::endl;
+	std::cout << "------------------------------------------------------------------------------" << std::endl;
+	Bureaucrat Garden("Garden", 137);
+	ShrubberyCreationForm shrubbery("MoSsA");
+	Garden.signForm(shrubbery);
+	Garden.executeForm(shrubbery);
 
-	ShrubberyCreationForm shrubbery("home");
-	Bureaucrat gardener("Gardener", 137);
-
-	gardener.signForm(shrubbery);
-	gardener.executeForm(shrubbery);
-
-
-	std::cout << "\n===== Robotomy =====" << std::endl;
-
-	RobotomyRequestForm robotomy("Bender");
+	std::cout << "------------------------------------------------------------------------------" << std::endl;
 	Bureaucrat robotomist("Robotomist", 45);
-
+	RobotomyRequestForm robotomy("MoSsA");
 	robotomist.signForm(robotomy);
 	robotomist.executeForm(robotomy);
 
-
-	std::cout << "\n===== Presidential Pardon =====" << std::endl;
-
-	PresidentialPardonForm pardon("Arthur Dent");
+	std::cout << "------------------------------------------------------------------------------" << std::endl;
 	Bureaucrat president("President", 5);
-
+	PresidentialPardonForm pardon("MoSsA");
 	president.signForm(pardon);
 	president.executeForm(pardon);
 
-
-	std::cout << "\n===== Execution errors =====" << std::endl;
-
+	std::cout << "------------------------------------------------------------------------------" << std::endl;
+	Bureaucrat bcrat("Bcrat", 100);
 	ShrubberyCreationForm unsignedForm("garden");
-	Bureaucrat bureaucrat("Bob", 100);
+	bcrat.executeForm(unsignedForm);
+	std::cout << "----------------------------------------" << std::endl;
 
-	bureaucrat.executeForm(unsignedForm);
-
-	ShrubberyCreationForm difficultForm("garden");
-	Bureaucrat weak("Weak", 150);
-
-	weak.signForm(difficultForm);
-	weak.executeForm(difficultForm);
+	Bureaucrat weakBcrat("Weak", 150);
+	ShrubberyCreationForm highForm("garden");
+	weakBcrat.signForm(highForm);
+	weakBcrat.executeForm(highForm);
 }

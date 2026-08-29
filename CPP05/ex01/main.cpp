@@ -6,18 +6,18 @@ int main()
 	std::cout << "------------------------------------------------------------------------------" << std::endl;
 	try
 	{
-		Form form("Tax Form", 50, 25);
-		std::cout << form << std::endl;
+		Form Med_Form("Med_Form", 50, 25);
+		std::cout << Med_Form << std::endl;
 		std::cout << "------------------------------------------------------------------------------" << std::endl;
-		Bureaucrat bob("Bob", 40);
-		bob.signForm(form);
-		std::cout << form << std::endl;
+		Bureaucrat Brcrat_1("Brcrat_1", 40);
+		Brcrat_1.signForm(Med_Form);
+		std::cout << Med_Form << std::endl;
 		std::cout << "------------------------------------------------------------------------------" << std::endl;
-		Form difficult("Difficult Form", 20, 10);
-		Bureaucrat Med("Med", 50);
 
-		Med.signForm(difficult);
-		std::cout << difficult << std::endl;
+		Form High_Form("High_Form", 20, 10);
+		Bureaucrat Brcrat_2("Brcrat_2", 50);
+		Brcrat_2.signForm(High_Form);
+		std::cout << High_Form << std::endl;
 	}
 	catch (const std::exception &e)
 	{

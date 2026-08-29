@@ -55,7 +55,7 @@ AForm* Intern::makeForm(const std::string& formName, const std::string& target) 
 		if (formName == forms[i].name)
 		{
 			std::cout << "Intern creates " << formName << std::endl;
-			return (this->*forms[i].creator)(target);
+			return (this->*(forms[i].creator))(target);
 		}
 	}
 	std::cerr << "ERROR: Unknown Form >> " << formName << std::endl;
