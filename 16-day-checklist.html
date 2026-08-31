@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>16-day build log — CPP06-09 + Inception</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#11151C;
+    --card:#1A1F29;
+    --card-hover:#1F2531;
+    --border:#262C39;
+    --border-strong:#333B4B;
+    --text:#E7E9EE;
+    --text-secondary:#9AA2B4;
+    --text-muted:#5F6779;
+    --teal:#3ECDB0;
+    --teal-dim:#1B4A42;
+    --blue:#5B9EE8;
+    --blue-dim:#1D3A5C;
+    --amber:#F0B429;
+    --amber-dim:#4A390F;
+    --done:#3ECDB0;
+    --font-mono:'IBM Plex Mono', monospace;
+    --font-sans:'Inter', sans-serif;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--text);
+    font-family:var(--font-sans);
+    padding:0 0 4rem;
+  }
+  .wrap{
+    max-width:760px;
+    margin:0 auto;
+    padding:0 1.5rem;
+  }
+  header{
+    position:sticky;
+    top:0;
+    background:var(--bg);
+    border-bottom:1px solid var(--border);
+    padding:1.75rem 0 1.25rem;
+    z-index:10;
+  }
+  .eyebrow{
+    font-family:var(--font-mono);
+    font-size:12px;
+    color:var(--text-muted);
+    letter-spacing:0.02em;
+    margin:0 0 0.4rem;
+  }
+  h1{
+    font-family:var(--font-mono);
+    font-size:22px;
+    font-weight:600;
+    margin:0 0 1rem;
+    letter-spacing:-0.01em;
+  }
+  .progress-row{
+    display:flex;
+    align-items:center;
+    gap:12px;
+  }
+  .progress-track{
+    flex:1;
+    height:8px;
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:5px;
+    overflow:hidden;
+  }
+  .progress-fill{
+    height:100%;
+    background:var(--teal);
+    width:0%;
+    transition:width 0.35s ease;
+  }
+  .progress-label{
+    font-family:var(--font-mono);
+    font-size:13px;
+    color:var(--text-secondary);
+    min-width:64px;
+    text-align:right;
+  }
+  .phase{
+    margin-top:2.5rem;
+  }
+  .phase-header{
+    display:flex;
+    align-items:baseline;
+    justify-content:space-between;
+    margin-bottom:1rem;
+    padding-bottom:0.6rem;
+    border-bottom:1px solid var(--border);
+  }
+  .phase-title{
+    font-family:var(--font-mono);
+    font-size:15px;
+    font-weight:600;
+  }
+  .phase-title.p1{color:var(--teal);}
+  .phase-title.p2{color:var(--blue);}
+  .phase-sub{
+    font-size:13px;
+    color:var(--text-muted);
+  }
+  .day-card{
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:10px;
+    margin-bottom:12px;
+    overflow:hidden;
+  }
+  .day-card.risk{
+    border-color:var(--border);
+    border-left:3px solid var(--amber);
+  }
+  .day-head{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    padding:14px 16px;
+    cursor:pointer;
+    user-select:none;
+  }
+  .day-head:hover{background:var(--card-hover);}
+  .day-num{
+    font-family:var(--font-mono);
+    font-size:12px;
+    color:var(--text-muted);
+    min-width:44px;
+  }
+  .day-title{
+    font-weight:500;
+    font-size:14.5px;
+    flex:1;
+  }
+  .risk-tag{
+    font-family:var(--font-mono);
+    font-size:10.5px;
+    color:var(--amber);
+    background:var(--amber-dim);
+    padding:2px 7px;
+    border-radius:4px;
+    margin-right:4px;
+  }
+  .day-count{
+    font-family:var(--font-mono);
+    font-size:12px;
+    color:var(--text-muted);
+    min-width:38px;
+    text-align:right;
+  }
+  .chevron{
+    color:var(--text-muted);
+    font-size:12px;
+    transition:transform 0.2s ease;
+    width:14px;
+  }
+  .day-card.open .chevron{transform:rotate(90deg);}
+  .day-body{
+    max-height:0;
+    overflow:hidden;
+    transition:max-height 0.25s ease;
+  }
+  .day-card.open .day-body{
+    max-height:600px;
+  }
+  .day-items{
+    padding:0 16px 16px 16px;
+    display:flex;
+    flex-direction:column;
+    gap:9px;
+  }
+  .item{
+    display:flex;
+    align-items:flex-start;
+    gap:10px;
+    cursor:pointer;
+  }
+  .item input{
+    margin:3px 0 0;
+    width:15px;
+    height:15px;
+    accent-color:var(--teal);
+    cursor:pointer;
+    flex-shrink:0;
+  }
+  .item span{
+    font-size:13.5px;
+    line-height:1.5;
+    color:var(--text-secondary);
+  }
+  .item input:checked ~ span{
+    color:var(--text-muted);
+    text-decoration:line-through;
+  }
+  .note{
+    margin-top:2.5rem;
+    padding:14px 16px;
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:10px;
+    font-size:13px;
+    color:var(--text-secondary);
+    line-height:1.6;
+  }
+  .note strong{color:var(--text);}
+  .reset{
+    font-family:var(--font-mono);
+    font-size:11.5px;
+    color:var(--text-muted);
+    background:none;
+    border:1px solid var(--border);
+    border-radius:6px;
+    padding:6px 12px;
+    cursor:pointer;
+    margin-top:1rem;
+  }
+  .reset:hover{border-color:var(--border-strong); color:var(--text-secondary);}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <p class="eyebrow">build log</p>
+    <h1>16 days — CPP06-09 + Inception</h1>
+    <div class="progress-row">
+      <div class="progress-track"><div class="progress-fill" id="overall-fill"></div></div>
+      <div class="progress-label" id="overall-label">0 / 0</div>
+    </div>
+  </header>
+
+  <div class="phase">
+    <div class="phase-header">
+      <span class="phase-title p1">phase 1 — cpp06 to cpp09</span>
+      <span class="phase-sub">days 1-6</span>
+    </div>
+    <div id="phase1"></div>
+  </div>
+
+  <div class="phase">
+    <div class="phase-header">
+      <span class="phase-title p2">phase 2 — inception</span>
+      <span class="phase-sub">days 7-16</span>
+    </div>
+    <div id="phase2"></div>
+  </div>
+
+  <div class="note"><strong>watch these two</strong> — day 6 (PmergeMe) and days 9-11 (WordPress/php-fpm) are the most likely to overrun. everything else has margin built in.</div>
+  <button class="reset" id="reset-btn">reset all progress</button>
+</div>
+
+<script>
+const DATA = [
+  {phase:1, day:1, title:"CPP06", risk:false, items:[
+    "Understand static_cast, dynamic_cast, reinterpret_cast, const_cast",
+    "Implement ScalarConverter (or equivalent)",
+    "Handle edge cases: overflow, nan, +inf/-inf, invalid input",
+    "Test with pseudo-literals and normal values",
+    "Push / commit"
+  ]},
+  {phase:1, day:2, title:"CPP07", risk:false, items:[
+    "Review template syntax (function templates, template classes)",
+    "Implement generic function templates (swap, min, max)",
+    "Implement Array template class (bounds checking, copy semantics)",
+    "Test with multiple types (int, char, custom class)",
+    "Push / commit"
+  ]},
+  {phase:1, day:3, title:"CPP08 — part 1", risk:false, items:[
+    "Review STL containers: vector, list, stack, map basics",
+    "Implement easyfind / container exercise",
+    "Start Span class — insertion, storage",
+    "Push / commit"
+  ]},
+  {phase:1, day:4, title:"CPP08 — part 2", risk:false, items:[
+    "Finish Span (shortest/longest span logic, exceptions)",
+    "Implement iterator-based exercise (MutantStack)",
+    "Review std::find, std::sort, std::transform usage",
+    "Test edge cases (empty containers, single element)",
+    "Push / commit"
+  ]},
+  {phase:1, day:5, title:"CPP09 — BitcoinExchange", risk:false, items:[
+    "Set up CSV/database file parsing",
+    "Implement date validation (format, real calendar dates)",
+    "Implement value validation (range, negative, non-numeric)",
+    "Match input dates to closest earlier database date",
+    "Handle error cases per subject requirements",
+    "Push / commit"
+  ]},
+  {phase:1, day:6, title:"CPP09 — PmergeMe", risk:true, items:[
+    "Understand merge-insertion sort (Ford-Johnson algorithm)",
+    "Implement with two different containers (vector + deque/list)",
+    "Implement comparison counting if required",
+    "Implement timing output (microseconds, both containers)",
+    "Test with large random datasets",
+    "Hard cutoff — note what's left and move on if needed",
+    "Push / commit"
+  ]},
+  {phase:2, day:7, title:"Docker fundamentals", risk:false, items:[
+    "Learn: images vs containers vs volumes vs networks",
+    "Learn: Dockerfile basics (FROM, RUN, COPY, CMD, ENTRYPOINT, EXPOSE)",
+    "Learn: docker-compose.yml syntax (services, volumes, networks, env_file)",
+    "Understand PID 1 / why tail -f, sleep infinity are banned",
+    "Build and run one dummy container yourself",
+    "Read the Inception subject fully, twice"
+  ]},
+  {phase:2, day:8, title:"MariaDB container", risk:false, items:[
+    "Write Dockerfile (Alpine/Debian base, no pre-built DB image)",
+    "Write entrypoint script (init DB, create user/password + DB)",
+    "Set up volume for persistent DB data",
+    "Test container standalone (connect via mysql client)",
+    "Push / commit"
+  ]},
+  {phase:2, day:9, title:"WordPress + php-fpm — setup", risk:true, items:[
+    "Write Dockerfile installing php-fpm + WordPress dependencies",
+    "Configure php-fpm to listen on socket or port",
+    "Understand php-fpm ↔ nginx communication model",
+    "Push / commit (WIP)"
+  ]},
+  {phase:2, day:10, title:"WordPress + php-fpm — WP-CLI install", risk:true, items:[
+    "Install WP-CLI in container",
+    "Write entrypoint script for non-interactive WordPress install",
+    "Configure wp-config.php (DB host, name, user, password from env)",
+    "Handle DB-not-ready race condition (wait/retry logic)",
+    "Push / commit"
+  ]},
+  {phase:2, day:11, title:"WordPress + php-fpm — finish", risk:true, items:[
+    "Create admin user + at least one regular user",
+    "Verify site loads correctly through php-fpm directly",
+    "Clean up, add volume for wp-content",
+    "Push / commit"
+  ]},
+  {phase:2, day:12, title:"NGINX + TLS", risk:false, items:[
+    "Write Dockerfile for NGINX (from scratch, no pre-built image)",
+    "Generate self-signed TLS certificate",
+    "Configure NGINX: TLSv1.2/1.3 only, no port 80",
+    "Configure reverse proxy to php-fpm socket/port",
+    "Test container standalone",
+    "Push / commit"
+  ]},
+  {phase:2, day:13, title:"Wire everything together", risk:false, items:[
+    "Write full docker-compose.yml (3 services, network, volumes)",
+    "Set up .env file, remove hardcoded secrets",
+    "Configure domain (login.42.fr style) in /etc/hosts",
+    "docker-compose up --build end-to-end",
+    "Fix startup order / dependency issues"
+  ]},
+  {phase:2, day:14, title:"Debug round 1", risk:false, items:[
+    "Fix volume permission errors (MariaDB data dir)",
+    "Fix container restart policy (restart on crash)",
+    "Verify one process per container, no forbidden CMD tricks",
+    "Confirm HTTPS works, HTTP does not",
+    "Confirm site reachable via domain name, not just IP"
+  ]},
+  {phase:2, day:15, title:"Debug round 2 + hardening", risk:false, items:[
+    "Re-test full docker-compose down/up from clean state",
+    "Verify data persists across container restarts",
+    "Review subject checklist line by line",
+    "Prepare to explain each Dockerfile choice",
+    "Clean up unused images/containers/volumes"
+  ]},
+  {phase:2, day:16, title:"Final buffer / bonus", risk:false, items:[
+    "If ahead: attempt one bonus service (Redis or Adminer)",
+    "If behind: use full day as slack",
+    "Final full run-through + defense prep",
+    "Final commit + tag"
+  ]}
+];
+
+const STORE_KEY = 'checklist-16day-progress';
+let state = {};
+try{
+  const saved = localStorage.getItem(STORE_KEY);
+  if(saved) state = JSON.parse(saved);
+}catch(e){ state = {}; }
+
+function save(){
+  try{ localStorage.setItem(STORE_KEY, JSON.stringify(state)); }catch(e){}
+}
+
+function itemKey(day, idx){ return day+'-'+idx; }
+
+function render(){
+  const p1 = document.getElementById('phase1');
+  const p2 = document.getElementById('phase2');
+  p1.innerHTML = '';
+  p2.innerHTML = '';
+
+  let totalItems = 0, totalDone = 0;
+
+  DATA.forEach(day => {
+    const card = document.createElement('div');
+    card.className = 'day-card' + (day.risk ? ' risk' : '');
+    card.dataset.day = day.day;
+
+    const doneCount = day.items.filter((_, i) => state[itemKey(day.day, i)]).length;
+    totalItems += day.items.length;
+    totalDone += doneCount;
+
+    const head = document.createElement('div');
+    head.className = 'day-head';
+    head.innerHTML = `
+      <span class="chevron">&#9656;</span>
+      <span class="day-num">day ${day.day}</span>
+      <span class="day-title">${day.risk ? '<span class="risk-tag">risk</span>' : ''}${day.title}</span>
+      <span class="day-count">${doneCount}/${day.items.length}</span>
+    `;
+    head.addEventListener('click', () => {
+      card.classList.toggle('open');
+    });
+
+    const body = document.createElement('div');
+    body.className = 'day-body';
+    const itemsWrap = document.createElement('div');
+    itemsWrap.className = 'day-items';
+
+    day.items.forEach((text, i) => {
+      const key = itemKey(day.day, i);
+      const label = document.createElement('label');
+      label.className = 'item';
+      const checked = !!state[key];
+      label.innerHTML = `<input type="checkbox" ${checked ? 'checked' : ''}><span>${text}</span>`;
+      const input = label.querySelector('input');
+      input.addEventListener('change', () => {
+        state[key] = input.checked;
+        save();
+        render();
+      });
+      itemsWrap.appendChild(label);
+    });
+
+    body.appendChild(itemsWrap);
+    card.appendChild(head);
+    card.appendChild(body);
+
+    if(day.phase === 1) p1.appendChild(card);
+    else p2.appendChild(card);
+  });
+
+  const pct = totalItems ? Math.round((totalDone/totalItems)*100) : 0;
+  document.getElementById('overall-fill').style.width = pct + '%';
+  document.getElementById('overall-label').textContent = totalDone + ' / ' + totalItems;
+}
+
+document.getElementById('reset-btn').addEventListener('click', () => {
+  if(confirm('Reset all checked progress?')){
+    state = {};
+    save();
+    render();
+  }
+});
+
+render();
+</script>
+</body>
+</html>
