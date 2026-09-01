@@ -2,31 +2,24 @@
 #include "Serializer.hpp"
 #include "Data.hpp"
 
-int	main(void)
+int	main()
 {
-	Data	original;
+	Data	data;
 
-	original.id = 42;
-	original.name = "The Answer";
-	original.value = 3.14159;
+	data.Nb = 42;
+	data.Str = "C++";
+	data.Double = 3.14159;
 
-	Data*		originalPtr = &original;
-	uintptr_t	raw = Serializer::serialize(originalPtr);
+	Data*		ptr = &data;
+	uintptr_t	raw = Serializer::serialize(ptr);
 	Data*		deserializedPtr = Serializer::deserialize(raw);
 
-	std::cout << "Original pointer:     " << originalPtr << std::endl;
-	std::cout << "Serialized (raw):     " << raw << std::endl;
+	std::cout << "Original pointer:     " << ptr << std::endl;
+	std::cout << "Serialized :     " << raw << std::endl;
 	std::cout << "Deserialized pointer: " << deserializedPtr << std::endl;
-
-	if (originalPtr == deserializedPtr)
-	{
-		std::cout << "SUCCESS: pointers are equal." << std::endl;
-		std::cout << "Data via deserialized pointer -> id: "
-			<< deserializedPtr->id << ", name: " << deserializedPtr->name
-			<< ", value: " << deserializedPtr->value << std::endl;
-	}
-	else
-		std::cout << "FAILURE: pointers differ." << std::endl;
-
-	return (0);
+	std::cout << std::endl;
+	std::cout << "Data via deserialized pointer :" << std::endl;
+	std::cout << "Nb: "<< deserializedPtr->Nb << std::endl;
+	std::cout << "Str: " << deserializedPtr->Str << std::endl;
+	std::cout << "Double: " << deserializedPtr->Double << std::endl;
 }

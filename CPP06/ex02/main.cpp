@@ -3,7 +3,7 @@
 #include <iostream>
 #include "Identify.hpp"
 
-int	main(void)
+int	main()
 {
 	std::srand(static_cast<unsigned int>(std::time(NULL)));
 
@@ -11,13 +11,11 @@ int	main(void)
 	{
 		Base*	p = generate();
 
-		std::cout << "--- Round " << i << " ---" << std::endl;
-		std::cout << "identify(Base*): ";
+		std::cout << "-------- " << i << " --------" << std::endl;
+		std::cout << "identify Base*: ";
 		identify(p);
-		std::cout << "identify(Base&): ";
+		std::cout << "identify Base&: ";
 		identify(*p);
 		delete p;
 	}
-
-	return (0);
 }

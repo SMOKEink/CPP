@@ -1,7 +1,7 @@
 #ifndef IDENTIFY_HPP
-# define IDENTIFY_HPP
+#define IDENTIFY_HPP
 
-# include "Base.hpp"
+#include "Base.hpp"
 
 Base*	generate(void);
 void	identify(Base* p);

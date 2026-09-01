@@ -5,9 +5,9 @@
 
 struct Data
 {
-	int			id;
-	std::string	name;
-	double		value;
+	int	Nb;
+	double Double;
+	std::string	Str;
 };
 
 #endif
