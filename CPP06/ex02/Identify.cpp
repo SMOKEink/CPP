@@ -5,13 +5,13 @@
 #include "B.hpp"
 #include "C.hpp"
 
-Base*	generate(void)
+Base*	generate()
 {
-	int	choice = std::rand() % 3;
+	int	rand = std::rand() % 3;
 
-	if (choice == 0)
+	if (rand == 0)
 		return (new A());
-	else if (choice == 1)
+	else if (rand == 1)
 		return (new B());
 	else
 		return (new C());
@@ -34,7 +34,6 @@ void	identify(Base& p)
 	try
 	{
 		A& a = dynamic_cast<A&>(p);
-
 		(void)a;
 		std::cout << "A" << std::endl;
 	}
@@ -43,7 +42,6 @@ void	identify(Base& p)
 		try
 		{
 			B& b = dynamic_cast<B&>(p);
-
 			(void)b;
 			std::cout << "B" << std::endl;
 		}
@@ -52,7 +50,6 @@ void	identify(Base& p)
 			try
 			{
 				C& c = dynamic_cast<C&>(p);
-
 				(void)c;
 				std::cout << "C" << std::endl;
 			}
@@ -63,9 +60,3 @@ void	identify(Base& p)
 		}
 	}
 }
-
-//
-//** No pointer is used here: we rely solely on reference dynamic_casts.
-//** A failed reference dynamic_cast throws an exception, which we catch
-//** with a generic handler (no std::bad_cast, no <typeinfo> header needed).
-//

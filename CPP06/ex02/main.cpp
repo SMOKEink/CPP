@@ -5,13 +5,13 @@
 
 int	main()
 {
-	std::srand(static_cast<unsigned int>(std::time(NULL)));
+	std::srand(std::time(NULL));
 
 	for (int i = 0; i < 6; ++i)
 	{
-		Base*	p = generate();
+		Base* p = generate();
 
-		std::cout << "-------- " << i << " --------" << std::endl;
+		std::cout << "------- " << i << " -------" << std::endl;
 		std::cout << "identify Base*: ";
 		identify(p);
 		std::cout << "identify Base&: ";
