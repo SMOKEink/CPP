@@ -11,7 +11,6 @@ static bool charOverflow(double val)
 		return (true);
 	return (false);
 }
-
 bool intOverflow(double val)
 {
 	if (val < static_cast<double>(INT_MIN) || val > static_cast<double>(INT_MAX))
@@ -19,6 +18,7 @@ bool intOverflow(double val)
 	return (false);
 }
 
+//
 void printChar(char c)
 {
 	if (std::isprint(static_cast<unsigned char>(c)))
@@ -27,6 +27,22 @@ void printChar(char c)
 		std::cout << "char: Non displayable" << std::endl;
 }
 
+void printInt(char c)
+{
+	std::cout << "int: " << static_cast<int>(c) << std::endl;
+}
+
+void printFloat(char c)
+{
+	std::cout << "float: " << std::fixed << std::setprecision(1) << static_cast<float>(c) << "f" << std::endl;
+}
+
+void printDouble(char c)
+{
+	std::cout << "double: " << std::fixed << std::setprecision(1) << static_cast<double>(c) << std::endl;
+}
+
+//
 void printChar(int nb)
 {
 	if (charOverflow(nb))
@@ -40,6 +56,23 @@ void printChar(int nb)
 			std::cout << "char: Non displayable" << std::endl;
 	}
 }
+
+void printInt(int nb)
+{
+	std::cout << "int: " << nb << std::endl;
+}
+
+void printFloat(int nb)
+{
+	std::cout << "float: " << std::fixed << std::setprecision(1) << static_cast<float>(nb) << "f" << std::endl;
+}
+
+void printDouble(int nb)
+{
+	std::cout << "double: " << std::fixed << std::setprecision(1) << static_cast<double>(nb) << std::endl;
+}
+
+//
 void printChar(float f)
 {
 	if (charOverflow(f) || std::isnan(f) || std::isinf(f))
@@ -53,6 +86,38 @@ void printChar(float f)
 			std::cout << "char: Non displayable" << std::endl;
 	}
 }
+
+void printInt(float f)
+{
+	if (intOverflow(f) || std::isnan(f) || std::isinf(f))
+		std::cout << "int: impossible" << std::endl;
+	else
+		std::cout << "int: " << static_cast<int>(f) << std::endl;
+}
+
+void printFloat(float f)
+{
+	std::cout << std::fixed << std::setprecision(1);
+	if (std::isnan(f))
+		std::cout << "float: nanf" << std::endl;
+	else if (std::isinf(f))
+		std::cout << "float: " << ((f > 0) ? "+inff" : "-inff") << std::endl;
+	else
+		std::cout << "float: " << f << "f" << std::endl;
+}
+
+void printDouble(float f)
+{
+	std::cout << std::fixed << std::setprecision(1);
+	if (std::isnan(f))
+		std::cout << "double: nan" << std::endl;
+	else if (std::isinf(f))
+		std::cout << "double: " << ((f > 0) ? "+inf" : "-inf") << std::endl;
+	else
+		std::cout << "double: " << static_cast<double>(f) << std::endl;
+}
+
+//
 void printChar(double d)
 {
 	if (charOverflow(d) || std::isnan(d) || std::isinf(d))
@@ -67,21 +132,6 @@ void printChar(double d)
 	}
 }
 
-void printInt(char c)
-{
-	std::cout << "int: " << static_cast<int>(c) << std::endl;
-}
-void printInt(int nb)
-{
-	std::cout << "int: " << nb << std::endl;
-}
-void printInt(float f)
-{
-	if (intOverflow(f) || std::isnan(f) || std::isinf(f))
-		std::cout << "int: impossible" << std::endl;
-	else
-		std::cout << "int: " << static_cast<int>(f) << std::endl;
-}
 void printInt(double d)
 {
 	if (intOverflow(d) || std::isnan(d) || std::isinf(d))
@@ -90,17 +140,10 @@ void printInt(double d)
 		std::cout << "int: " << static_cast<int>(d) << std::endl;
 }
 
-void printFloat(char c)
-{
-	std::cout << "float: " << std::fixed << std::setprecision(1) << static_cast<float>(c) << "f" << std::endl;
-}
-void printFloat(int nb)
-{
-	std::cout << "float: " << std::fixed << std::setprecision(1) << static_cast<float>(nb) << "f" << std::endl;
-}
-void printFloat(float f)
+void printFloat(double d)
 {
 	std::cout << std::fixed << std::setprecision(1);
+	float f = static_cast<float>(d);
 	if (std::isnan(f))
 		std::cout << "float: nanf" << std::endl;
 	else if (std::isinf(f))
@@ -108,35 +151,7 @@ void printFloat(float f)
 	else
 		std::cout << "float: " << f << "f" << std::endl;
 }
-void printFloat(double d)
-{
-	std::cout << std::fixed << std::setprecision(1);
-	if (std::isnan(d))
-		std::cout << "float: nanf" << std::endl;
-	else if (std::isinf(d))
-		std::cout << "float: " << ((d > 0) ? "+inff" : "-inff") << std::endl;
-	else
-		std::cout << "float: " << static_cast<float>(d) << "f" << std::endl;
-}
 
-void printDouble(char c)
-{
-	std::cout << "double: " << std::fixed << std::setprecision(1) << static_cast<double>(c) << std::endl;
-}
-void printDouble(int nb)
-{
-	std::cout << "double: " << std::fixed << std::setprecision(1) << static_cast<double>(nb) << std::endl;
-}
-void printDouble(float f)
-{
-	std::cout << std::fixed << std::setprecision(1);
-	if (std::isnan(f))
-		std::cout << "double: nan" << std::endl;
-	else if (std::isinf(f))
-		std::cout << "double: " << ((f > 0) ? "+inf" : "-inf") << std::endl;
-	else
-		std::cout << "double: " << static_cast<double>(f) << std::endl;
-}
 void printDouble(double d)
 {
 	std::cout << std::fixed << std::setprecision(1);

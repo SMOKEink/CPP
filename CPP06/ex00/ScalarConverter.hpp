@@ -15,3 +15,6 @@ public:
 };
 
 #endif
+
+//	The behavior of isdigit (and the other <cctype> functions) is undefined
+//	if the value of the argument is neither representable as unsigned char nor equal to EOF.

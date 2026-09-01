@@ -72,7 +72,7 @@ static Type extractType(const std::string& str)
 	}
 	return (hasDot ? DOUBLE : INT);
 }
-#include <cstdio>
+
 void ScalarConverter::convert(const std::string& str)
 {
 	Type type = extractType(str);
@@ -101,8 +101,8 @@ void ScalarConverter::convert(const std::string& str)
 		{
 			std::cout << "char: impossible" << std::endl;
 			std::cout << "int: impossible" << std::endl;
-			std::cout << "float: " << std::fixed << std::setprecision(1) << static_cast<float>(d) << "f" << std::endl;
-			std::cout << "double: " << std::fixed << std::setprecision(1) << d << std::endl;
+			printFloat(d);
+			printDouble(d);
 		}
 		else
 		{
