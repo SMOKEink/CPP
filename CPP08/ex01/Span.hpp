@@ -23,10 +23,13 @@ public:
 	template <typename iter>
 	void addNumber(iter first, iter end)
 	{
-		if (nbrs.size() + std::distance(first, end) > maxSize)
+		std::vector<int> tmp;
+
+		for (; first != end; ++first)
+			tmp.push_back(*first);
+		if (nbrs.size() + tmp.size() > maxSize)
 			throw std::exception();
-		for(; first != end; ++first)
-			addNumber(*first);
+		nbrs.insert(nbrs.end(), tmp.begin(), tmp.end());
 	}
 };
 
