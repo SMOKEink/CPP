@@ -2,6 +2,8 @@
 #define SPAN_HPP
 
 #include <vector>
+#include <exception>
+#include <iterator>
 
 class Span
 {
@@ -21,6 +23,8 @@ public:
 	template <typename iter>
 	void addNumber(iter first, iter end)
 	{
+		if (nbrs.size() + std::distance(first, end) > maxSize)
+			throw std::exception();
 		for(; first != end; ++first)
 			addNumber(*first);
 	}

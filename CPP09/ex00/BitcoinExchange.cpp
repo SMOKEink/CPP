@@ -1,4 +1,6 @@
 #include "BitcoinExchange.hpp"
+#include <exception>
+#include <stdexcept>
 
 BitcoinExchange::BitcoinExchange()
 {}
@@ -18,10 +20,26 @@ BitcoinExchange::~BitcoinExchange()
 
 float BitcoinExchange::getRate(const std::string& date) const
 {
-	std::map<std::string, float>::const_iterator it;
+    std::map<std::string, float>::const_iterator it;
 
-	it = dataBase.find(date);
-	if (it != dataBase.end())
-		return (it->second);
-	return (0.0f);
+    it = dataBase.lower_bound(date);
+
+    if (it == dataBase.begin())
+    {
+        if (it->first == date)
+            return it->second;
+
+        throw std::runtime_error("date is too early");
+    }
+
+    if (it == dataBase.end())
+    {
+        --it;
+        return it->second;
+    }
+
+    if (it->first != date)
+        --it;
+
+    return it->second;
 }
